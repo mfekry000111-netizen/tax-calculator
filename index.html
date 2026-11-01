@@ -17,6 +17,8 @@
             --blue-border: #93c5fd;
             --gray-light: #f8fafc;
             --gray-border: #cbd5e1;
+            --pink-btn-bg: #f43f5e;
+            --pink-btn-hover: #e11d48;
         }
 
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
@@ -205,13 +207,40 @@
             transition: all 0.2s ease;
         }
 
+        .section-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--gray-border);
+            padding-bottom: 6px;
+        }
+
         .section-title { 
             color: #1e3a8a; 
-            margin-bottom: 12px; 
             font-weight: 700; 
-            border-bottom: 1px dashed var(--gray-border); 
-            padding-bottom: 6px; 
             font-size: 1.05rem; 
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .small-reset-btn {
+            background: var(--pink-btn-bg);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(244, 63, 94, 0.3);
+        }
+        .small-reset-btn:hover {
+            background: var(--pink-btn-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(244, 63, 94, 0.4);
         }
         
         .input-group { margin-bottom: 12px; position: relative; }
@@ -250,7 +279,7 @@
             border-radius: 12px; 
             font-size: 1.1rem; 
             font-weight: 700; 
-            margin-top: 20px; 
+            margin-top: 12px; 
             cursor: pointer; 
             transition: all 0.25s ease;
             box-shadow: 0 6px 15px rgba(30, 58, 138, 0.25);
@@ -288,7 +317,6 @@
             color: var(--blue-primary);
         }
 
-        /* صندوق صافي الراتب النهائي */
         .box-net-final { 
             background: #1e3a8a; 
             border: 1px solid #1d4ed8; 
@@ -363,7 +391,10 @@
     <!-- 1. ضريبة الشيك الشهرية -->
     <div id="system1">
         <div class="section-box">
-            <div class="section-title">أولاً: بيانات العامل</div>
+            <div class="section-header-flex">
+                <div class="section-title">أولاً: بيانات العامل</div>
+                <button type="button" class="small-reset-btn" onclick="resetSystem(1)">تفريغ البيانات</button>
+            </div>
             <div class="input-group">
                 <label>اسم الموظف أو رقم الصرف (ابحث بأي أسماء متفرقة أو برقم الصرف):</label>
                 <input type="text" id="s1_empName" placeholder="مثال: أحمد محمد (أو أي اسم أول مع ثالث...)..." autocomplete="off" oninput="filterCustomDropdown(1)" onfocus="filterCustomDropdown(1)">
@@ -461,7 +492,7 @@
                 <span id="resMonthlyTaxable">0 ج.م</span>
             </div>
             
-            <div class="section-title" style="font-size:0.95rem; margin-top:15px;">تفصيل التشريح الضريبي للشيك:</div>
+            <div class="section-title" style="font-size:0.95rem; margin-top:15px; border-bottom:1px dashed var(--gray-border); padding-bottom:6px; margin-bottom:12px;">تفصيل التشريح الضريبي للشيك:</div>
             <div class="tax-breakdown-wrapper">
                 <div class="breakdown-box" id="bracketsBreakdown"></div>
             </div>
@@ -484,7 +515,10 @@
     <!-- 2. نظام مصلحة الضرائب المصرية -->
     <div id="system2" class="hidden">
         <div class="section-box">
-            <div class="section-title">أولاً: بيانات العامل</div>
+            <div class="section-header-flex">
+                <div class="section-title">أولاً: بيانات العامل</div>
+                <button type="button" class="small-reset-btn" onclick="resetSystem(2)">تفريغ البيانات</button>
+            </div>
             <div class="input-group">
                 <label>اسم الموظف أو رقم الصرف (ابحث بأي أسماء متفرقة أو برقم الصرف):</label>
                 <input type="text" id="s2_empName" placeholder="مثال: أحمد محمد (أو أي اسم أول مع ثالث...)..." autocomplete="off" oninput="filterCustomDropdown(2)" onfocus="filterCustomDropdown(2)">
@@ -557,7 +591,7 @@
                 <input type="number" id="s2_disabilityEx" value="0" placeholder="0">
             </div>
             <div class="input-group" style="margin-top: 10px;">
-                <label>العلاوة المنضمة (جنية):</label>
+                <label>العلاوة المنضمة (جنية - منسبة تلقائياً وقابلة للتعديل):</label>
                 <input type="number" id="s2_allowance" value="" placeholder="0">
             </div>
             <div class="input-group" style="margin-top: 10px;">
@@ -614,7 +648,7 @@
                 <span id="s2_resAnnualBase">0 ج.م</span>
             </div>
             
-            <div class="section-title" style="font-size:0.95rem; margin-top:15px;">تفصيل التشريح السنوي للضريبة المجمعة:</div>
+            <div class="section-title" style="font-size:0.95rem; margin-top:15px; border-bottom:1px dashed var(--gray-border); padding-bottom:6px; margin-bottom:12px;">تفصيل التشريح السنوي للضريبة المجمعة:</div>
             <div class="tax-breakdown-wrapper">
                 <div class="breakdown-box" id="s2_breakdown"></div>
             </div>
@@ -637,6 +671,8 @@
 
 <script>
 let globalEmployeesData = [];
+let currentRawAllowance = 0;
+
 try {
     let saved = localStorage.getItem('persistentEmployees2274');
     if (saved) {
@@ -649,20 +685,18 @@ try {
     globalEmployeesData = [];
 }
 
-// دالة توحيد وتطبيع النصوص العربية للبحث الذكي
 function normalizeArabic(text) {
     if (text === undefined || text === null) return "";
     return text
         .toString()
-        .replace(/[\u064B-\u0652]/g, "") // إزالة التشكيل
-        .replace(/[أإآا]/g, "ا")       // توحيد الألفات
-        .replace(/ى/g, "ي")            // توحيد الياء والالف المقصورة
-        .replace(/ة/g, "ه")            // توحيد التاء المربوطة والهاء
+        .replace(/[\u064B-\u0652]/g, "")
+        .replace(/[أإآا]/g, "ا")
+        .replace(/ى/g, "ي")
+        .replace(/ة/g, "ه")
         .trim()
         .toLowerCase();
 }
 
-// دالة معالجة أرقام التليفونات لضمان البحث الصحيح حتى لو اختفى الصفر الأول في الإكسيل
 function cleanPhone(phone) {
     if (!phone) return "";
     var cleaned = phone.toString().replace(/\D/g, "").trim();
@@ -701,7 +735,6 @@ function getVal(emp, keys) {
     return "";
 }
 
-// دالة البحث الذكي بالأسماء المتفرقة
 function filterCustomDropdown(systemNum) {
     var prefix = systemNum === 1 ? 's1_' : 's2_';
     var rawInput = document.getElementById(prefix + 'empName').value;
@@ -712,7 +745,9 @@ function filterCustomDropdown(systemNum) {
         return;
     }
 
-    var queryWords = normalizeArabic(rawInput).split(/\s+/).filter(function(w) { return w.length > 0; });
+    var normInput = normalizeArabic(rawInput);
+    var queryWords = normInput.split(/\s+/).filter(function(w) { return w.length > 0; });
+    
     if (queryWords.length === 0) {
         dropdown.classList.add('hidden-dropdown');
         return;
@@ -733,9 +768,14 @@ function filterCustomDropdown(systemNum) {
 
         var allWordsFound = true;
         for (var w = 0; w < queryWords.length; w++) {
-            if (!normName.includes(queryWords[w])) {
-                allWordsFound = false;
-                break;
+            var word = queryWords[w];
+            if (!normName.includes(word)) {
+                var compactWord = word.replace(/\s+/g, '');
+                var compactName = normName.replace(/\s+/g, '');
+                if (!compactName.includes(compactWord)) {
+                    allWordsFound = false;
+                    break;
+                }
             }
         }
 
@@ -763,7 +803,6 @@ function filterCustomDropdown(systemNum) {
     else dropdown.classList.add('hidden-dropdown');
 }
 
-// 2. بحث رقم الصرف
 function filterPayIdDropdown(systemNum) {
     var prefix = systemNum === 1 ? 's1_' : 's2_';
     var rawInput = document.getElementById(prefix + 'payId').value;
@@ -807,7 +846,6 @@ function filterPayIdDropdown(systemNum) {
     else dropdown.classList.add('hidden-dropdown');
 }
 
-// 3. بحث الرقم القومي
 function filterNatIdDropdown(systemNum) {
     var prefix = systemNum === 1 ? 's1_' : 's2_';
     var rawInput = document.getElementById(prefix + 'natId').value;
@@ -851,7 +889,6 @@ function filterNatIdDropdown(systemNum) {
     else dropdown.classList.add('hidden-dropdown');
 }
 
-// 4. بحث رقم التليفون
 function filterPhoneDropdown(systemNum) {
     var prefix = systemNum === 1 ? 's1_' : 's2_';
     var rawInput = document.getElementById(prefix + 'phone').value;
@@ -907,7 +944,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// تعبئة البيانات والمنطق الدقيق المطلوب حصرياً
+// تعبئة البيانات وجلب كافة الإعفاءات والاستحقاقات لكل موظف على حدة
 function fillEmployeeData(matchedEmp, systemNum) {
     var nameVal = getVal(matchedEmp, ['اسم الموظف', 'الاسم', 'Name']);
     var pId = getVal(matchedEmp, ['رقم الصرف', 'رقم_الصرف', 'PayID']);
@@ -915,15 +952,12 @@ function fillEmployeeData(matchedEmp, systemNum) {
     var rawPhone = getVal(matchedEmp, ['رقم التليفون', 'رقم الهاتف', 'الهاتف', 'التليفون', 'Phone', 'Mobile']);
     var phoneVal = cleanPhone(rawPhone);
     
-    // جلب قيمة المعاملة الضريبية من الإكسيل وتطبيق الشرط بدقة حرفية
     var taxTrVal = getVal(matchedEmp, ['المعاملة الضريبية', 'معاملة ضريبية', 'الحالة الضريبية', 'TaxTreatment', 'الاعاقة', 'الإعاقة', 'ذوي الاعاقة', 'ذوي الإعاقة', 'الحالة']);
     var normTr = normalizeArabic(taxTrVal);
-    
-    // الشرط المطلوب: إذا احتوت الخلية على الكلمات المحددة فقط يتم اختيار ذوي الإعاقة، وإلا فالباقي كله بدون إعاقة
     var isDisability = normTr.includes('ذوي إعاقة') || normTr.includes('ذوي') || normTr.includes('ذوى إعاقة') || normTr.includes('زوي اعاقه') || normTr.includes('ذوي اعاقه');
 
     var grossVal = getVal(matchedEmp, ['إجمالي الاستحقاقات', 'الاستحقاقات', 'Gross']);
-    var allowVal = getVal(matchedEmp, ['العلاوة المنضمة', 'علاوة', 'Allowance']);
+    var allowVal = parseFloat(getVal(matchedEmp, ['العلاوة المنضمة', 'علاوة', 'Allowance'])) || 0;
     var insVal = getVal(matchedEmp, ['التأمينات الاجتماعية', 'التأمينات', 'Insurance']);
     var loanVal = getVal(matchedEmp, ['قسط مدة سابقة', 'قسط', 'Loan']);
     var fundVal = getVal(matchedEmp, ['الصناديق الخاصة', 'الصناديق', 'Funds']);
@@ -939,7 +973,6 @@ function fillEmployeeData(matchedEmp, systemNum) {
     document.getElementById(prefix + 'natId').value = nId;
     document.getElementById(prefix + 'phone').value = phoneVal;
 
-    // ضبط حالة الأزرار الدائرية (Radio Buttons)
     if (isDisability) {
         document.getElementById(prefix + 'opt_disability').checked = true;
         document.getElementById(prefix + 'opt_none').checked = false;
@@ -957,9 +990,8 @@ function fillEmployeeData(matchedEmp, systemNum) {
         document.getElementById('funds').value = fundVal;
         document.getElementById('otherExemption').value = profitVal;
     } else {
-        updatePersonalEx();
+        currentRawAllowance = allowVal;
         document.getElementById('s2_gross').value = grossVal;
-        document.getElementById('s2_allowance').value = allowVal;
         document.getElementById('s2_insurance').value = insVal;
         document.getElementById('s2_prevLoan').value = loanVal;
         document.getElementById('s2_funds').value = fundVal;
@@ -967,6 +999,8 @@ function fillEmployeeData(matchedEmp, systemNum) {
         document.getElementById('s2_prevBase').value = pBase;
         document.getElementById('s2_prevWorkDays').value = pDays;
         document.getElementById('s2_prevTax').value = pTax;
+        
+        updatePersonalEx();
     }
 }
 
@@ -1002,9 +1036,13 @@ function toggleDisabilityField() {
 function updatePersonalEx() {
     var daysField = document.getElementById('s2_days').value;
     var workDays = (daysField === "") ? 0 : parseFloat(daysField);
+    
     var calculatedEx = (1666.67 / 30) * workDays;
     document.getElementById('s2_personalEx').value = calculatedEx.toFixed(2);
     
+    var calculatedAllowance = (currentRawAllowance / 30) * workDays;
+    document.getElementById('s2_allowance').value = calculatedAllowance.toFixed(2);
+
     var isDisabilityChecked = document.getElementById('s2_opt_disability').checked;
     var disGroup = document.getElementById('disabilityGroup');
     
@@ -1033,6 +1071,48 @@ function updateDisabilityEx() {
     } else {
         document.getElementById('s2_disabilityEx').value = "0";
     }
+}
+
+function resetSystem(sysNum) {
+    if (sysNum === 1) {
+        document.getElementById('s1_empName').value = "";
+        document.getElementById('s1_payId').value = "";
+        document.getElementById('s1_natId').value = "";
+        document.getElementById('s1_phone').value = "";
+        document.getElementById('grossSalary').value = "";
+        document.getElementById('s1_opt_none').checked = true;
+        document.getElementById('s1_disabilityEx').value = "0";
+        document.getElementById('allowance').value = "";
+        document.getElementById('insurance').value = "";
+        document.getElementById('prevLoan').value = "";
+        document.getElementById('funds').value = "";
+        document.getElementById('otherExemption').value = "";
+        document.getElementById('otherDeductions').value = "";
+        document.getElementById('resultsBox').style.display = 'none';
+        toggleDisabilityField();
+    } else {
+        currentRawAllowance = 0;
+        document.getElementById('s2_empName').value = "";
+        document.getElementById('s2_payId').value = "";
+        document.getElementById('s2_natId').value = "";
+        document.getElementById('s2_phone').value = "";
+        document.getElementById('s2_prevBase').value = "";
+        document.getElementById('s2_prevWorkDays').value = "";
+        document.getElementById('s2_prevTax').value = "";
+        document.getElementById('s2_gross').value = "";
+        document.getElementById('s2_days').value = "30";
+        document.getElementById('s2_opt_none').checked = true;
+        document.getElementById('s2_personalEx').value = "1666.67";
+        document.getElementById('s2_disabilityEx').value = "0";
+        document.getElementById('s2_allowance').value = "";
+        document.getElementById('s2_insurance').value = "";
+        document.getElementById('s2_prevLoan').value = "";
+        document.getElementById('s2_funds').value = "";
+        document.getElementById('s2_profits').value = "";
+        document.getElementById('s2_resultsBox').style.display = 'none';
+        updatePersonalEx();
+    }
+    closeAllDropdowns();
 }
 
 window.onload = function() {
@@ -1118,7 +1198,6 @@ function calculateTax() {
     var resultsBox = document.getElementById('resultsBox');
     resultsBox.style.display = 'block';
     
-    // النزول التلقائي للأسفل تماماً عند صندوق صافي الراتب النهائي
     setTimeout(function() {
         var targetBox = document.getElementById('netSalaryBox');
         targetBox.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -1330,7 +1409,6 @@ function calculateTaxETA() {
     var resultsBoxETA = document.getElementById('s2_resultsBox');
     resultsBoxETA.style.display = 'block';
     
-    // النزول التلقائي للأسفل تماماً عند صندوق الضريبة النهائية
     setTimeout(function() {
         var targetBoxETA = document.getElementById('s2_periodTaxBox');
         targetBoxETA.scrollIntoView({ behavior: 'smooth', block: 'end' });
